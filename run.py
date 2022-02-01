@@ -24,7 +24,7 @@ def login_s3():
 
 def dump_mongodb(target):
     # run mongodump
-    os.system(f'mongodump --uri="{MONGODB_URI}" --archive | gzip > {target}')
+    os.system(f'mongodump --uri="{MONGODB_URI}" --gzip --archive={target}')
 
 
 def upload_to_s3(source, target):
