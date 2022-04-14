@@ -2,16 +2,17 @@ module github.com/rwv/mongodb-backup-s3
 
 go 1.18
 
-require github.com/aws/aws-sdk-go v1.43.38
+require (
+	github.com/aws/aws-sdk-go v1.43.38
+	github.com/mongodb/mongo-tools v0.0.0-20220127135714-e2842eb54930
+)
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/jessevdk/go-flags v1.4.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.10.1 // indirect
-	github.com/mongodb/mongo-tools v0.0.0-20220127135714-e2842eb54930 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.0.2 // indirect
