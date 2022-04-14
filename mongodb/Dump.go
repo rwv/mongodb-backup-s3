@@ -4,7 +4,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/mongodb/mongo-tools/common/progress"
 	"github.com/mongodb/mongo-tools/mongodump"
 
 	"log"
@@ -36,15 +35,10 @@ func Dump(mongodbUri string, target string) error {
 		return err
 	}
 
-	progressManager := progress.NewBarWriter(log.Writer(), progressBarWaitTime, progressBarLength, false)
-	progressManager.Start()
-	defer progressManager.Stop()
-
 	dump := mongodump.MongoDump{
-		ToolOptions:     opts.ToolOptions,
-		OutputOptions:   opts.OutputOptions,
-		InputOptions:    opts.InputOptions,
-		ProgressManager: progressManager,
+		ToolOptions:   opts.ToolOptions,
+		OutputOptions: opts.OutputOptions,
+		InputOptions:  opts.InputOptions,
 	}
 
 	if err = dump.Init(); err != nil {
