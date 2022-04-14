@@ -8,6 +8,8 @@ import (
 
 	"github.com/rwv/mongodb-backup-s3/mongodb"
 	"github.com/rwv/mongodb-backup-s3/storage"
+
+	"github.com/robfig/cron/v3"
 )
 
 func backup(mongodbUri string) error {
@@ -50,8 +52,18 @@ func backup(mongodbUri string) error {
 func main() {
 	mongodbUri := os.Getenv("MONGODB_URI")
 
-	err := backup(mongodbUri)
-	if err != nil {
-		log.Fatal(err)
+	c := cron.New()
+
+	c.AddFunc("@daily", func() {
+		err := backup(mongodbUri)
+		if err != nil {
+			log.Fatal(err)
+		}
+	})
+
+	c.Start()
+
+	for {
+		time.Sleep(time.Second)
 	}
 }

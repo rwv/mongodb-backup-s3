@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/aws/aws-sdk-go v1.43.38
 	github.com/mongodb/mongo-tools v0.0.0-20220127135714-e2842eb54930
+	github.com/robfig/cron/v3 v3.0.0
 )
 
 require (
