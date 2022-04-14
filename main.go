@@ -51,6 +51,7 @@ func backup(mongodbUri string) error {
 
 func main() {
 	mongodbUri := os.Getenv("MONGODB_URI")
+	log.Print("Mongodb Uri: " + mongodbUri)
 
 	c := cron.New()
 

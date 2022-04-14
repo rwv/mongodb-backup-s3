@@ -1,6 +1,8 @@
 ARG GO_VERSION=1.18
 
-FROM golang:${GO_VERSION} AS builder
+FROM golang:${GO_VERSION}-alpine AS builder
+
+RUN apk --no-cache add git ca-certificates
 
 WORKDIR $GOPATH/src/github.com/rwv/mongodb-backup-s3
 
@@ -14,7 +16,7 @@ COPY . $GOPATH/src/github.com/rwv/mongodb-backup-s3
 RUN go build -o /mongodb-backup-s3
 
 # Second Stage
-FROM mongo
+FROM alpine
 
 COPY --from=builder /mongodb-backup-s3 /mongodb-backup-s3
 
