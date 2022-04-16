@@ -38,7 +38,7 @@ func backup(mongodbUri string) error {
 		return err
 	}
 
-	storage := *storage.GetInstance()
+	storage := storage.New()
 
 	log.Print("Uploading to S3...")
 	err = storage.Upload(tempFilename, uploadFilename)
