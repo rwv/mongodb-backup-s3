@@ -1,7 +1,6 @@
 package storage
 
 import (
-	"bytes"
 	"fmt"
 	"os"
 
@@ -19,15 +18,13 @@ func (storage *Storage) Upload(filePath string, fileName string) error {
 
 	// Get the file info
 	upFileInfo, _ := upFile.Stat()
-	var fileSize int64 = upFileInfo.Size()
-	fileBuffer := make([]byte, fileSize)
-	upFile.Read(fileBuffer)
+	fileSize := upFileInfo.Size()
 
 	// Put Object to S3
 	_, err = s3.New(storage.session).PutObject(&s3.PutObjectInput{
 		Bucket:             storage.bucket,
 		Key:                aws.String(fileName),
-		Body:               bytes.NewReader(fileBuffer),
+		Body:               upFile,
 		ContentLength:      aws.Int64(fileSize),
 		ContentDisposition: aws.String("attachment"),
 	})
